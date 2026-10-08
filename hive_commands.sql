@@ -1,5 +1,5 @@
 -- ============================================================
--- Big Data Project: Customer Churn & Audit Risk Analysis
+-- ChurnSight: Customer Churn & Audit Risk Analysis
 -- Apache Hive - Project Commands
 -- ============================================================
 
@@ -7,9 +7,9 @@
 -- 1. DATABASE MANAGEMENT COMMANDS
 -- ============================================================
 
-CREATE DATABASE project_bd;
+CREATE DATABASE churnsight;
 
-USE project_bd;
+USE churnsight;
 
 
 -- ============================================================
@@ -32,7 +32,7 @@ CREATE TABLE risk (
     Client_Satisfaction_Score DOUBLE
 )
 STORED AS PARQUET
-LOCATION '/user/bigdata/risk';
+LOCATION '/user/churnsight/risk';
 
 
 -- Telco Table
@@ -60,7 +60,7 @@ CREATE TABLE telco (
     Churn STRING
 )
 STORED AS PARQUET
-LOCATION '/user/bigdata/telco';
+LOCATION '/user/churnsight/telco';
 
 
 -- ============================================================
@@ -320,7 +320,7 @@ GROUP BY Employee_Workload;
 
 
 -- ============================================================
--- 7. EXPORT RESULTS FOR POWER BI
+-- 7. EXPORT RESULTS FOR REPORTING
 -- ============================================================
 
 INSERT OVERWRITE DIRECTORY '/tmp/firm_risk_final'
@@ -360,21 +360,21 @@ SELECT * FROM telco_contract_analysis;
 
 
 -- ============================================================
--- 8. MERGE HIVE OUTPUT FILES TO CSV FOR POWER BI
+-- 8. MERGE HIVE OUTPUT FILES TO CSV FOR REPORTING
 -- ============================================================
 
 -- Run these commands in the Linux terminal, NOT inside Hive:
 
--- hdfs dfs -getmerge /tmp/firm_risk_final /home/bigdata/Desktop/firm_risk_final.csv
--- hdfs dfs -getmerge /tmp/industry_risk_analysis /home/bigdata/Desktop/industry_risk_analysis.csv
--- hdfs dfs -getmerge /tmp/yearly_risk_analysis /home/bigdata/Desktop/yearly_risk_analysis.csv
--- hdfs dfs -getmerge /tmp/ai_audit_analysis /home/bigdata/Desktop/ai_audit_analysis.csv
--- hdfs dfs -getmerge /tmp/revenue_risk_analysis /home/bigdata/Desktop/revenue_risk_analysis.csv
--- hdfs dfs -getmerge /tmp/telco_kpi /home/bigdata/Desktop/telco_kpi.csv
--- hdfs dfs -getmerge /tmp/telco_payment_analysis /home/bigdata/Desktop/telco_payment_analysis.csv
--- hdfs dfs -getmerge /tmp/telco_contract_analysis /home/bigdata/Desktop/telco_contract_analysis.csv
--- hdfs dfs -getmerge /tmp/telco_internet_analysis /home/bigdata/Desktop/telco_internet_analysis.csv
--- hdfs dfs -getmerge /tmp/telco_tenure_analysis_new /home/bigdata/Desktop/telco_tenure_analysis_new.csv
+-- hdfs dfs -getmerge /tmp/firm_risk_final exports/firm_risk_final.csv
+-- hdfs dfs -getmerge /tmp/industry_risk_analysis exports/industry_risk_analysis.csv
+-- hdfs dfs -getmerge /tmp/yearly_risk_analysis exports/yearly_risk_analysis.csv
+-- hdfs dfs -getmerge /tmp/ai_audit_analysis exports/ai_audit_analysis.csv
+-- hdfs dfs -getmerge /tmp/revenue_risk_analysis exports/revenue_risk_analysis.csv
+-- hdfs dfs -getmerge /tmp/telco_kpi exports/telco_kpi.csv
+-- hdfs dfs -getmerge /tmp/telco_payment_analysis exports/telco_payment_analysis.csv
+-- hdfs dfs -getmerge /tmp/telco_contract_analysis exports/telco_contract_analysis.csv
+-- hdfs dfs -getmerge /tmp/telco_internet_analysis exports/telco_internet_analysis.csv
+-- hdfs dfs -getmerge /tmp/telco_tenure_analysis_new exports/telco_tenure_analysis_new.csv
 
 
 -- ============================================================

@@ -22,3 +22,7 @@ logs/
 *.log
 telco_risk/output/
 processed_data/
+
+# Generated pipeline output
+output/
+exports/
